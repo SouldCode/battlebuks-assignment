@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600667057784",
+    "project_id": "assignment-battlebucks-66f82",
+    "storage_bucket": "assignment-battlebucks-66f82.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600667057784:android:ac048bbe81e2b83595c78d",
+        "android_client_info": {
+          "package_name": "com.souldcode.assignment"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAS29_eL_Iv6Ugv2JZOlHNJH8Jm5Ptm_EQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
