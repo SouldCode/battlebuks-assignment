@@ -82,7 +82,7 @@ class ScoreboardRepositoryImpl(
         val selectedBottomIds = mutableSetOf<String>()
         while (selectedBottomIds.size < needFromBottom) {
             val randomNum = Random.nextInt(21, TOT_PLAYER_LIMIT)
-            val id = "$FIREBASE_DOC_PATH_PREFIX"+"_$randomNum"
+            val id = "$FIREBASE_DOC_PATH_PREFIX" + "_$randomNum"
             if (selectedTopPlayer.none() { it.id == id }) {
                 selectedBottomIds.add(id)
             }
@@ -96,10 +96,10 @@ class ScoreboardRepositoryImpl(
             activities.add(PlayerScoreActivity(playerName = player.name, increment = increment))
         }
 
-        for (playerIds in selectedBottomIds){
+        for (playerIds in selectedBottomIds) {
             val docRef = collection.document(playerIds)
-            val increment = Random.nextInt(1,10)
-            batch.update(docRef,"score", FieldValue.increment(increment.toLong()))
+            val increment = Random.nextInt(1, 10)
+            batch.update(docRef, "score", FieldValue.increment(increment.toLong()))
             val formattedName = playerIds.replace("player_", "Player ")
             activities.add(PlayerScoreActivity(playerName = formattedName, increment = increment))
         }
@@ -107,5 +107,30 @@ class ScoreboardRepositoryImpl(
         // 4. Commit all 20 updates in a single transaction (atomic write)
         batch.commit().await()
         return activities
+    }
+
+    override suspend fun getPlayersPage(
+        limit: Int, lastPlayerId: String?
+    ): List<Player> {
+
+        var query = firestore.collection(FIREBASE_PLAYER_COLLECTION)
+            .orderBy("score", Query.Direction.DESCENDING)
+            .limit(limit.toLong())
+        if (lastPlayerId != null) {
+            // fetch last visible document
+            val lastDoc = firestore.collection(FIREBASE_PLAYER_COLLECTION)
+                .document(lastPlayerId)
+                .get()
+                .await()
+            if (lastDoc.exists()) {
+                // 2. start query after last visible doc
+                query = query.startAfter(lastDoc)
+            }
+        }
+
+        // 3. One-time database fetch
+        val snapshot = query.get().await()
+        return snapshot.toObjects(Player::class.java)
+
     }
 }

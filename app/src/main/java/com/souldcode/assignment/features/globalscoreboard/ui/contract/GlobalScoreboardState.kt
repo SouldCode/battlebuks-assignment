@@ -9,5 +9,7 @@ data class GlobalScoreboardState(
     val players: List<Player> = emptyList(),
     val playerScoreActivities: List<PlayerScoreActivity> = emptyList(),
     val isSeeding: Boolean = false,
-    val isSimulating: Boolean = false
+    val isSimulating: Boolean = false,
+    val isLoadingNextPage: Boolean = false,
+    val isLastPageReached: Boolean = false
 )

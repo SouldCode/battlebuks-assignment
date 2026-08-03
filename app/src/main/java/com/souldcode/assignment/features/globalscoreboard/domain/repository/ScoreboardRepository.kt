@@ -15,4 +15,6 @@ interface ScoreboardRepository {
     //will update top 10 player and 10 from anywhere between database
     suspend fun simulateScoreUpdates(currentTopPlayer: List<Player>): List<PlayerScoreActivity>
 
+    suspend fun getPlayersPage(limit: Int, lastPlayerId: String?): List<Player>
+
 }
