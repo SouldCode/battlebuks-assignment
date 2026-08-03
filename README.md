@@ -25,7 +25,7 @@ Follow these simple steps to set up and run the project:
 5. **Interact with the Scoreboard**
    - Click **"Add Players"** to write 1,000 dummy players into your Firestore collection.
    - Click **"Update Score"** to start real-time updates and see rankings dynamically shift with slide animations and border glow pulses.
-   - Scroll down the scoreboard to trigger infinite scroll pagination (loads 20 items per page).
+   - Scroll down the scoreboard to trigger scroll pagination (loads 20 items per page).
 
 
 
@@ -37,7 +37,7 @@ Follow these simple steps to set up and run the project:
    -- I have use stable keys in LazyColumn and derivedStateOf where needed, so Compose updates only the necessary UI elements and avoids unnecessary recompositions.
    
    - **Memory Leaks**
-   -- I have use viewModelScope to manage coroutines based on the ViewModel lifecycle. I have also remove active database listeners using awaitClose when they are no longer needed, which helps prevent memory leaks.
+   -- I have use viewModelScope to manage coroutines based on the ViewModel lifecycle. I have also remove active database listeners using awaitClose when they are no longer needed, which helps prevent memory leaks. Also i have implemented leak canary to detect leak and also implemented firebase crashlytics to detect crash 
 
    - **How This Behaves** 
    -- On Screen Rotation: I have used a retained ViewModel to preserve the state in memory and keep the Firestore flow collection active, preventing any data re-fetching or loading states on rotation.When App goes to Background: I have used collectAsStateWithLifecycle() to pause UI flow collection, which is a standard Compose practice to safely stop observing changes while the app is in the background.
