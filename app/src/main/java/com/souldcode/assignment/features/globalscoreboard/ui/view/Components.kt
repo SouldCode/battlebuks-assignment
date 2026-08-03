@@ -53,8 +53,7 @@ import kotlinx.coroutines.delay
 fun ActionControlPanel(
     isSeeding: Boolean, isSimulating: Boolean, onSeedClick: () -> Unit, onSimulateClick: () -> Unit
 ) {
-    val surfaceColor = CardGrey // Card BG
-    val primaryGradient = Brush.horizontalGradient(
+     val primaryGradient = Brush.horizontalGradient(
         colors = listOf(ButtonPurple, ButtonOrange)
     )
 
@@ -68,7 +67,7 @@ fun ActionControlPanel(
             colors = CardDefaults.cardColors(containerColor = TopBarColor),
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, Color(0xFF2C2D4A), RoundedCornerShape(16.dp))
+                .border(1.dp, CardGrey, RoundedCornerShape(16.dp))
         ) {
             Row(
                 modifier = Modifier
@@ -78,12 +77,14 @@ fun ActionControlPanel(
             ) {
                 // Button 1: Seed 1,000 Players
                 Button(
-                    onClick = onSeedClick,
-                    enabled = !isSeeding,
-                    colors = ButtonDefaults.buttonColors(containerColor = CardGrey),
-                    modifier = Modifier.weight(1f),
+                    onClick = onSimulateClick,
+                    enabled = !isSimulating,
+                    colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                    modifier = Modifier
+                        .weight(1f)
+                        .background(primaryGradient, RoundedCornerShape(12.dp)),
                     shape = RoundedCornerShape(12.dp)
-                ) {
+                ){
                     if (isSeeding) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(18.dp), color = Color.White
@@ -109,7 +110,7 @@ fun ActionControlPanel(
                         )
                     } else {
                         Text(
-                            "Simulate updates",
+                            "Update Score",
                             color = Color.White,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -141,14 +142,14 @@ fun TableHeader() {
             textAlign = TextAlign.Center
         )
         Text(
-            text = "PLAYER NAME",
+            text = "USER NAME",
             color = Color.Gray,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.weight(1f)
         )
         Text(
-            text = "SCORE",
+            text = "LIVE SCORE",
             color = Color.Gray,
             fontSize = 11.sp,
             fontWeight = FontWeight.Bold,
