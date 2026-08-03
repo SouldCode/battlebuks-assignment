@@ -21,7 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -35,13 +35,13 @@ import androidx.compose.ui.unit.sp
 import com.souldcode.assignment.features.globalscoreboard.ui.contract.GlobalScoreboardIntent
 import com.souldcode.assignment.features.globalscoreboard.ui.viewmodel.GlobalScoreboardViewModel
 import com.souldcode.assignment.ui.theme.TopBarColor
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun GlobalScoreboardScreen(
-    viewModel: GlobalScoreboardViewModel, modifier: Modifier = Modifier
-) {
-    val state by viewModel.state.collectAsState()
+ 
+ @OptIn(ExperimentalMaterial3Api::class)
+ @Composable
+ fun GlobalScoreboardScreen(
+     viewModel: GlobalScoreboardViewModel
+ ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
     val shouldLoadMore = remember {
         derivedStateOf {
@@ -99,7 +99,7 @@ fun GlobalScoreboardScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "No players found.\nPlease click 'Seed 1,000 Players' to initialize.",
+                            text = "No players found.Please click 'Add Players' to initialize.",
                             color = Color.Gray,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(32.dp)

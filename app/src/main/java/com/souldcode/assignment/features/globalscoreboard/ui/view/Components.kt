@@ -77,7 +77,7 @@ fun ActionControlPanel(
             ) {
                 // Button 1: Seed 1,000 Players
                 Button(
-                    onClick = onSimulateClick,
+                    onClick = onSeedClick,
                     enabled = !isSimulating,
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
                     modifier = Modifier
