@@ -15,3 +15,15 @@ val TopBarColor = Color(0xFF0D0E15)
 val ButtonPurple = Color(0xFF8A2387)
 val ButtonOrange = Color(0xFFBD4600)
 val CardGrey = Color(0xFF2C2D4A)
+
+val Row_ITEM_SURFACE = Color(0xFF161726)
+
+val ACCENT_GOLD = Color(0xFFFFD700)
+
+val ACCENT_SILVER = Color(0xFFC0C0C0)
+
+val ACCENT_BRONZE = Color(0xFFCD7F32)
+
+val COLOR_FLASH_GREEN = Color(0xFF00FF7F)
+
+val DEFAULT_BORDER_COLOR = Color(0xFF202235)
